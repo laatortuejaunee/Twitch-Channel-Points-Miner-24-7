@@ -851,3 +851,9 @@ class Twitch(object):
                 self.__check_connection_handler(chunk_size)
 
             self.__chuncked_sleep(60, chunk_size=chunk_size)
+
+            except (ValueError, KeyError, requests.exceptions.ConnectionError) as e:
+                logger.error(f"Error while syncing inventory: {e}")
+                self.__check_connection_handler(chunk_size)
+
+            self.__chuncked_sleep(60, chunk_size=chunk_size)
